@@ -14,6 +14,7 @@ count=0
 filecount=0
 while count<int(quantity):
     print("test")
+    storeImages=list()
     #iterate through "Layers" dir
     for files in os.scandir(imagepathLoad["imagePaths"]["files"]):
         strFiles=str(files).replace("<DirEntry","").replace("'","").replace(">","").strip()
@@ -22,8 +23,11 @@ while count<int(quantity):
         random_image=random.choice([
             image for image in os.listdir(imagepathLoad["imagePaths"]["files"]+"\\"+strFiles)
             if os.path.isfile(os.path.join(imagepathLoad["imagePaths"]["files"]+"\\"+strFiles)) and image.endswith(".jpg")
-            or image.endswith(".png",33)
+            or image.endswith(".png")
         ])
+        storeImages.append()
+        im=Image.open(imagepathLoad["imagePaths"]["files"]+strFiles+"\\"+random_image)
+        im.show()
         filecount+=1
     count+=1
 count=0
