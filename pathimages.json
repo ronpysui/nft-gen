@@ -1,11 +1,6 @@
 {
 	"imagePaths":{
-		"layer_1":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\layer_1\\",
-		"layer_2":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\layer_2\\",
-		"layer_3":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\layer_3\\",
-		"layer_4":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\layer_4\\",
-		"layer_5":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\layer_5\\",
-		"background_a1":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\background\\",
-		"files":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\Layers\\"
+		"files":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\Layers\\",
+		"nfts":"C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\nfts"
 	}
 }

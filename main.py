@@ -11,7 +11,7 @@ quantity=input('how many to generate?: ')
 
 #random pick
 count=0
-filecount=0
+foldercount=5
 while count<int(quantity):
     print("test")
     storeImages=list()
@@ -25,14 +25,17 @@ while count<int(quantity):
             if os.path.isfile(os.path.join(imagepathLoad["imagePaths"]["files"]+"\\"+strFiles)) and image.endswith(".jpg")
             or image.endswith(".png")
         ])
-        storeImages.append()
+
+        #random img
         im=Image.open(imagepathLoad["imagePaths"]["files"]+strFiles+"\\"+random_image)
-        im.show()
-        filecount+=1
+        nft_image=Image.new("RGBA",(32,32),(0,0,0,0))
+        nft_image.save(imagepathLoad["imagePaths"]["nfts"]+"\\"+"image.png","PNG")
+        #nft_image.show()
+
     count+=1
 count=0
 
-print(filecount,count)
+print(foldercount,count)
 #end
 
 
