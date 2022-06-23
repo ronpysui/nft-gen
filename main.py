@@ -9,17 +9,17 @@ imagepathLoad=json.loads(data) #loads json file
 
 quantity=input('how many to generate?: ')
 
-count=0
+count,fileCount,saveCount=0,0,0
 foldercount=5
 height,width=32,32
 nft_image=Image.new("RGBA",(height,width),(0,0,0,0))
 
+attributes=list()
 #loop random file
 while count<int(quantity):
-    print("test")
     storeImages=list()
 
-    #iterate through "Layers" dir
+    #iterate through "Layers" dir 5 folders
     for files in os.scandir(imagepathLoad["imagePaths"]["files"]):
         strFiles=str(files).replace("<DirEntry","").replace("'","").replace(">","").strip()
 
@@ -29,15 +29,29 @@ while count<int(quantity):
             if os.path.isfile(os.path.join(imagepathLoad["imagePaths"]["files"]+"\\"+strFiles)) and image.endswith(".jpg")
             or image.endswith(".png")
         ])
+        #opens random image
+        randIm=Image.open(imagepathLoad["imagePaths"]["files"]+strFiles+"\\"+random_image)
+
+        fileCount+=1
+        attributes.append(random_image)
+
+        if fileCount==1:
+            combine_1=Image.alpha_composite(nft_image,randIm)
+        elif fileCount==2:
+            combine_2=Image.alpha_composite(combine_1,randIm)
+        elif fileCount==3:
+            combine_3=Image.alpha_composite(combine_2,randIm)
+        elif fileCount==4:
+            combine_4=Image.alpha_composite(combine_3,randIm)
+        elif fileCount==foldercount:
+            combine_5=Image.alpha_composite(combine_4,randIm)
+            saveCount+=1
+            combine_5.save(imagepathLoad["imagePaths"]["nfts"]+"\\"+f"image_{saveCount}.png","PNG")
+            fileCount=0
+
     count+=1
-
-    #save img --> dir
-    nft_image.save(imagepathLoad["imagePaths"]["nfts"]+"\\"+f"image_{count}.png","PNG")
-
-    #random img
-    randIm=Image.open(imagepathLoad["imagePaths"]["files"]+strFiles+"\\"+random_image)
-
-
+    print(f"no.{count} {attributes}")
+    attributes.clear()
 count=0
 
 print(foldercount,count)
