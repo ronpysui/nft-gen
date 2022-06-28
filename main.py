@@ -5,27 +5,43 @@ from PIL import Image
 
 with open('C:\\Users\\kevin\\OneDrive\\Desktop\\nftimagegen\\pathimages.json','r')as imagePaths:
     data=imagePaths.read()
-imagepathLoad=json.loads(data) #loads json file
+imagepathLoad=json.loads(data)
 
 quantity=input('how many to generate?: ')
 
 count,fileCount,saveCount=0,0,0
+canExecute=False
 canCount=True
 folderCount=0
-height,width=32,32
+
+#configs
+height,width=32,32 #image size
+
 nft_image=Image.new("RGBA",(height,width),(0,0,0,0))
 
+rarityList=dict()
 attributes=list()
 #loop random file
+
+for getFiles in os.scandir(imagepathLoad["imagePaths"]["files"]):
+    nameFiles=str(getFiles).replace("<DirEntry","").replace("'","").replace(">","").strip()
+    for getImages in os.scandir(imagepathLoad["imagePaths"]["files"]+"\\"+nameFiles):
+        nameImages=str(getImages).replace("<DirEntry","").replace("'","").replace(">","").replace(".png","").strip()
+        rarityList[nameImages]=0
+print(rarityList)
+
 while count<int(quantity):
     storeImages=list()
 
     #iterate through "Layers" dir 5 folders
     for files in os.scandir(imagepathLoad["imagePaths"]["files"]):
+        strFiles=str(files).replace("<DirEntry","").replace("'","").replace(">","").strip()
+
         if canCount==True:
             folderCount+=1
-
-        strFiles=str(files).replace("<DirEntry","").replace("'","").replace(">","").strip()
+            #store files in rarityList
+            for images in os.listdir(imagepathLoad["imagePaths"]["files"]+"\\"+strFiles):
+                rarityList[images]=0
 
         #pick random image
         random_image=random.choice([
@@ -62,6 +78,7 @@ while count<int(quantity):
 count=0
 
 print(folderCount,count)
+print(rarityList)
 print("Finished!"+f"\nGenerated {quantity} images")
 #end
 
